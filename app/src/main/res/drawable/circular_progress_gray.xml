@@ -6,8 +6,9 @@
             android:shape="ring"
             android:thicknessRatio="50.0"
             android:useLevel="false">
-
             <solid android:color="#D4DEE7" />
+            <!--  android:useLevel="false"
+                      to be visible we have to put this-->
         </shape>
     </item>
 </layer-list>

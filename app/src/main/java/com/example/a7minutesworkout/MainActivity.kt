@@ -9,9 +9,9 @@ import android.widget.Toast
 import com.example.a7minutesworkout.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private var countDownTimer : CountDownTimer? = null
+   /* private var countDownTimer : CountDownTimer? = null
     private var timerDuration : Long = 60000
-    private var pauseOffset : Long = 0
+    private var pauseOffset : Long = 0*/
     private var binding : ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
