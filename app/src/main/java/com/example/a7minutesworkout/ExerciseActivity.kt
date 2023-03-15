@@ -154,6 +154,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts?.stop()
             tts?.shutdown()
         }
+        if(player != null){
+            player?.stop()
+        }
 
         binding = null
     }
