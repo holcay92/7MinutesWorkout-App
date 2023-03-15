@@ -8,13 +8,13 @@ import com.example.a7minutesworkout.databinding.ActivityExerciseBinding
 
 class ExerciseActivity : AppCompatActivity() {
     private var restTimer: CountDownTimer? = null
+    private var countDownDuration: Long = 10000
     private var restProgress = 0
     private var binding: ActivityExerciseBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         setSupportActionBar(binding?.toolbarExercise)
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -37,7 +37,7 @@ class ExerciseActivity : AppCompatActivity() {
 
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
-        restTimer = object : CountDownTimer(10000, 1000) {
+        restTimer = object : CountDownTimer(countDownDuration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBar?.progress = 10 - restProgress

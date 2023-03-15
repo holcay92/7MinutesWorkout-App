@@ -15,6 +15,7 @@
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
+        <!-- this changes color of the back arrow. -->
         <item name="colorControlNormal" >@color/toolbar_color_control_normal</item>
     </style>
 </resources>
