@@ -1,5 +1,6 @@
 package com.example.a7minutesworkout
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,6 +16,8 @@ class ExerciseActivity : AppCompatActivity() {
     private var restProgress = 0
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
+    private var exerciseList: ArrayList<ExerciseModel>? = null // We will initialize the list later.
+    private var currentExercisePosition = -1 // Current Position of Exercise.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
@@ -26,31 +29,41 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        exerciseList = Constants.defaultExerciseList()
         setUpRestView()
     }
     // checks if we go back to the previous activity it will cancel the timer
     private fun setUpRestView(){
-        if(restTimer != null){
+        binding?.flRestView?.visibility = View.VISIBLE
+        binding?.tvTitle?.visibility = View.VISIBLE
+        binding?.tvExerciseName?.visibility = View.INVISIBLE
+        binding?.flExerciseView?.visibility = View.INVISIBLE
+        binding?.ivImage?.visibility = View.INVISIBLE
+
+        if (restTimer != null) {
             restTimer?.cancel()
             restProgress = 0
         }
-        // this helps to set the progress bar to 0
+        // This function is used to set the progress details.
         setRestProgressBar()
     }
-    private fun setUpExerciseView(){
-        binding?.flProgressBar?.visibility = View.INVISIBLE
-        binding?.tvTitle?.text = "Exercise Name"
+    private fun setUpExerciseView() {
+
+        binding?.flRestView?.visibility = View.INVISIBLE
+        binding?.tvTitle?.visibility = View.INVISIBLE
+        binding?.tvExerciseName?.visibility = View.VISIBLE
         binding?.flExerciseView?.visibility = View.VISIBLE
+        binding?.ivImage?.visibility = View.VISIBLE
 
-
-        if(exerciseTimer != null){
-            restTimer?.cancel()
-            restProgress = 0
+        if (exerciseTimer != null) {
+            exerciseTimer?.cancel()
+            exerciseProgress = 0
         }
-        // this helps to set the progress bar to 0
+        binding?.ivImage?.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition].getName()
+
         setExerciseProgressBar()
     }
-
 
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
@@ -66,10 +79,12 @@ class ExerciseActivity : AppCompatActivity() {
                     "Now, we will start the activity",
                     Toast.LENGTH_SHORT
                 ).show()
+                currentExercisePosition++
                 setUpExerciseView()
             }
         }.start()
     }
+
     private fun setExerciseProgressBar() {
         binding?.progressBarExercise?.progress = exerciseProgress
         exerciseTimer = object : CountDownTimer(exerciseCountDownDuration, 1000) {
@@ -79,11 +94,18 @@ class ExerciseActivity : AppCompatActivity() {
                 binding?.tvTimerExercise?.text = ((exerciseCountDownDuration/1000).toInt() - exerciseProgress).toString()
             }
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExerciseActivity,
-                    "30 seconds are over, lets go ot the rest view...",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (currentExercisePosition < exerciseList?.size!! - 1) {
+                    setUpRestView()
+                } else {
+
+                    Toast.makeText(
+                        this@ExerciseActivity,
+                        "Congratulations! You have completed the 7 minutes workout.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val intent = Intent(this@ExerciseActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }.start()
     }
