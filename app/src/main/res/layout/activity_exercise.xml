@@ -15,7 +15,6 @@
         android:theme="@style/ToolbarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/colorPrimary" />
-
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -27,7 +26,6 @@
         app:layout_constraintBottom_toTopOf="@id/flRestView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
     <FrameLayout
         android:id="@+id/flRestView"
         android:layout_width="100dp"
@@ -104,7 +102,6 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/tvExerciseName"
         app:layout_constraintTop_toBottomOf="@id/toolbarExercise" />
-
     <TextView
         android:id="@+id/tvExerciseName"
         android:layout_width="wrap_content"
@@ -126,7 +123,6 @@
         android:visibility="gone"
         tools:visibility="visible"
         android:background="@drawable/item_circular_color_accent_border"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvExerciseName">
@@ -161,5 +157,14 @@
                 tools:text="30" />
         </LinearLayout>
     </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvExerciseStatus"
+        android:layout_margin="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flExerciseView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
