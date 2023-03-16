@@ -126,6 +126,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     Toast.LENGTH_SHORT
                 ).show()
                 currentExercisePosition++
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                // This function is used to notify the adapter that the data has been changed.
+                // It is essential to call this function when we change the data in the list.
+                exerciseAdapter?.notifyDataSetChanged()
                 setUpExerciseView()
             }
         }.start()
@@ -143,6 +147,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
+
+                exerciseList!![currentExercisePosition].setIsSelected(false)
+                exerciseList!![currentExercisePosition].setIsCompleted(true)
+                exerciseAdapter?.notifyDataSetChanged()
+
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
                     setUpRestView()
                 } else {
