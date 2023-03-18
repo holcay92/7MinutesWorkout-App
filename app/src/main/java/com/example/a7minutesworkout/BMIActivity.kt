@@ -103,6 +103,16 @@ class BMIActivity : AppCompatActivity() {
         }
         return isValid
     }
+    private fun validateUSUnits(): Boolean {
+        var isValid = true
+
+        if (binding?.etMetricUnitWeight?.text.toString().isEmpty()) {
+            isValid = false
+        } else if (binding?.etMetricUnitHeight?.text.toString().isEmpty()) {
+            isValid = false
+        }
+        return isValid
+    }
 
     private fun displayBMIResult(bmi: Float) {
 
