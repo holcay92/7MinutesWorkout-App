@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a7minutesworkout.databinding.ItemHistoryRowBinding
 
-// TODO(Step 2 : Created a adapter class to bind the to RecyclerView to show the list of completed dates in History Screen.)
-// START
 class HistoryAdapter(private val items: ArrayList<String>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 

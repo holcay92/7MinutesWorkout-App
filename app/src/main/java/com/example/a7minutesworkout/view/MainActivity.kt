@@ -57,11 +57,9 @@ class MainActivity : AppCompatActivity() {
                 tvTimer.text = "${(timerDuration/1000).toString()}"
              }
          }
-
         */
-
         binding?.flStart?.setOnClickListener {
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Starting Activity", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
@@ -74,7 +72,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
     // To avoid memory leak we need to set the binding to null in onDestroy
     override fun onDestroy() {
         super.onDestroy()

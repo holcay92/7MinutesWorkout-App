@@ -10,7 +10,6 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.example.a7minutesworkout.viewModal.ExerciseStatusAdapter
 import com.example.a7minutesworkout.R
 import com.example.a7minutesworkout.databinding.ActivityExerciseBinding
@@ -21,8 +20,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
-    private var restCountDownDuration: Long = 1
-    private var exerciseCountDownDuration: Long = 3
+    private var restCountDownDuration: Long = 10
+    private var exerciseTimerDuration: Long = 30
     private var binding: ActivityExerciseBinding? = null
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
@@ -44,7 +43,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = Constants.defaultExerciseList()
 
         tts = TextToSpeech(this, this)
-
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
             customDialogForBackButton()
@@ -133,7 +131,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         setExerciseProgressBar()
     }
-
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
         restTimer = object : CountDownTimer(restCountDownDuration*1000, 1000) {
@@ -144,11 +141,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExerciseActivity,
-                    "Now, we will start the activity",
-                    Toast.LENGTH_SHORT
-                ).show()
                 currentExercisePosition++
                 exerciseList!![currentExercisePosition].setIsSelected(true)
                 // This function is used to notify the adapter that the data has been changed.
@@ -158,36 +150,34 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }.start()
     }
-
     private fun setExerciseProgressBar() {
+
         binding?.progressBarExercise?.progress = exerciseProgress
-        exerciseTimer = object : CountDownTimer(exerciseCountDownDuration*1000, 1000) {
+
+        exerciseTimer = object : CountDownTimer(exerciseTimerDuration * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
-                binding?.progressBarExercise?.progress =
-                    (exerciseCountDownDuration / 1000).toInt() - exerciseProgress
-                binding?.tvTimerExercise?.text =
-                    ((exerciseCountDownDuration / 1000).toInt() - exerciseProgress).toString()
+                binding?.progressBarExercise?.progress = exerciseTimerDuration.toInt() - exerciseProgress
+                binding?.tvTimerExercise?.text = (exerciseTimerDuration.toInt() - exerciseProgress).toString()
             }
 
             override fun onFinish() {
 
-
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
-                    exerciseList!![currentExercisePosition].setIsSelected(false)
-                    exerciseList!![currentExercisePosition].setIsCompleted(true)
+                    exerciseList!![currentExercisePosition].setIsSelected(false) // exercise is completed so selection is set to false
+                    exerciseList!![currentExercisePosition].setIsCompleted(true) // updating in the list that this exercise is completed
                     exerciseAdapter?.notifyDataSetChanged()
                     setUpRestView()
                 } else {
-
-                   finish()
-                    val intent = Intent(this@ExerciseActivity, FinishActivity::class.java)
+                    finish()
+                    val intent = Intent(this@ExerciseActivity,FinishActivity::class.java)
                     startActivity(intent)
                 }
+                // END
             }
         }.start()
-    }
 
+    }
     override fun onDestroy() {
         super.onDestroy()
         if (restTimer != null) {
