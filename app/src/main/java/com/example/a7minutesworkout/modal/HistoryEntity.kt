@@ -3,10 +3,11 @@ package com.example.a7minutesworkout.modal
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
-@Entity
+/**
+ * Create an entity with @param [tableName]
+ * Use @param [date] as primary key
+ * */
+@Entity(tableName = "history-table")
 data class HistoryEntity(
     @PrimaryKey
-    val date:String
-
-)
+    val date:String)
