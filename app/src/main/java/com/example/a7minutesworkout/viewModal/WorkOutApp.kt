@@ -1,6 +1,7 @@
-package com.example.a7minutesworkout
+package com.example.a7minutesworkout.viewModal
 
 import android.app.Application
+import com.example.a7minutesworkout.viewModal.HistoryDatabase
 
 class WorkOutApp: Application() {
 

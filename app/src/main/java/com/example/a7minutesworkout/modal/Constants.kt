@@ -1,5 +1,6 @@
-package com.example.a7minutesworkout
+package com.example.a7minutesworkout.modal
 
+import com.example.a7minutesworkout.R
 import java.util.*
 
 /**

@@ -1,9 +1,10 @@
-package com.example.a7minutesworkout
+package com.example.a7minutesworkout.viewModal
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.a7minutesworkout.modal.HistoryEntity
 
 @Database(entities = [HistoryEntity::class], version = 1)
 abstract class HistoryDatabase : RoomDatabase() {

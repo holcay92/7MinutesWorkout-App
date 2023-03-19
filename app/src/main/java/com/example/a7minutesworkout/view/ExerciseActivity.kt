@@ -1,4 +1,4 @@
-package com.example.a7minutesworkout
+package com.example.a7minutesworkout.view
 
 import android.app.Dialog
 import android.content.Intent
@@ -11,8 +11,12 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.a7minutesworkout.viewModal.ExerciseStatusAdapter
+import com.example.a7minutesworkout.R
 import com.example.a7minutesworkout.databinding.ActivityExerciseBinding
 import com.example.a7minutesworkout.databinding.DialogCustomBackConfirmationBinding
+import com.example.a7minutesworkout.modal.Constants
+import com.example.a7minutesworkout.modal.ExerciseModel
 import java.util.*
 import kotlin.collections.ArrayList
 

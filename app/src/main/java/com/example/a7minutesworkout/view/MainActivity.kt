@@ -1,4 +1,4 @@
-package com.example.a7minutesworkout
+package com.example.a7minutesworkout.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -65,12 +65,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
-        binding?.flBMI?.setOnClickListener {
-           val intent = Intent(this@MainActivity, BMIActivity::class.java)
-              startActivity(intent)
-        }
         binding?.flHistory?.setOnClickListener {
             val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
+        }
+        binding?.flBMI?.setOnClickListener {
+            val intent = Intent(this@MainActivity, BMIActivity::class.java)
             startActivity(intent)
         }
     }
