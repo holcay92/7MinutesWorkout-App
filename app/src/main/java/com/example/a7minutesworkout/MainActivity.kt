@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding?.flBMI?.setOnClickListener {
-           val intent = Intent(this, BMIActivity::class.java)
+           val intent = Intent(this@MainActivity, BMIActivity::class.java)
               startActivity(intent)
         }
         binding?.flHistory?.setOnClickListener {
